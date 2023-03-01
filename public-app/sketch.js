@@ -34,20 +34,29 @@ function setup() {
     controllerY = wHeight / 2;
     background(2,3,4);
     angleMode(DEGREES);
+   
     socket.emit('device-size', {wWidth,wHeight});
-	}
+
+    let btn = createButton("Permitir movimiento");
+    btn.mousePressed(function () {
+        DeviceOrientationEvent.requestPermission();
+    });	
+    btn.position(100,100);
+}
     
 
 function draw() {
     background(0);
-   image(imageFiles[3], 30, 0, 395, 853);
+    //newCursor(pmouseX, pmouseY);
+  image(imageFiles[3], 30, 0, 395, 853);
+
        
 }
 
 function deviceMoved() {
     switch (interactions) {
         case 2:
-            socket.emit('mobile-instructions', { interactions, rotationY, rotationZ, rotationX });
+            socket.emit('mobile-instructions', { interactions, rotationY, rotationZ });
             background(0, 255, 0);
             break;
     } 

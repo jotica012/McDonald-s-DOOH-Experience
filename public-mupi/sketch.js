@@ -51,6 +51,8 @@ function setup() {
     background(0);
 }
 
+
+
 function draw() {
     background(0);
    imageMode(CORNER);
@@ -64,20 +66,19 @@ function draw() {
           imageMode(CORNER);
           image(mupiImages[9], 400, 0, 177, 244);
 }
-
-
 socket.on('mupi-instructions', instructions => {
 
   let { interactions } = instructions;
   switch (interactions) {
       case 2:
-        console.log(" " + rotationX + " " + rotationY);
           let { rotationX, rotationY, rotationZ } = instructions;
+          console.log(" " + rotationX + " " + rotationY);
           controllerY = (rotationX * mupiHeight) / 90;
           controllerX = (rotationY * mupiWidth) / 90;
           break;
   }
 });
+
 
 
  socket.on('mupi-size', deviceSize => {
@@ -90,7 +91,7 @@ socket.on('mupi-instructions', instructions => {
 });
 
 
-  function windowResized() {
+ function windowResized() {
     resizeCanvas(wWidth, wHeight);
 }
 

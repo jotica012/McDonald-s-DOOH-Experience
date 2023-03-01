@@ -1,11 +1,14 @@
 //const express = require('express');
 //const { Server } = require('socket.io');
-import express from 'express';
-import {Server} from 'socket.io';
+//import express from 'express';
+//import {Server} from 'socket.io';
+import { express, Server, cors, os } from './dependencies.js'
+
 const PORT = 5080; 
-const SERVER_IP = '192.168.68.110 '; //Reemplazar IP U: 172.30.65.245..
+const SERVER_IP = '172.30.65.245'; //Reemplazar IP U:172.30.65.245 .. / Barns: 192.168.68.110
 
 const app = express();
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use('/app', express.static('public-app'));
 app.use('/mupi', express.static('public-mupi'));
@@ -17,17 +20,22 @@ const httpServer = app.listen(PORT, () => {
 
 const io = new Server(httpServer, { path: '/real-time' });
 
-io.on('connection', socket => {
+io.on('connection', (socket) => {
     console.log(socket.id);
+   
 
    socket.on('device-size', deviceSize => {
         socket.broadcast.emit('mupi-size', deviceSize);
     });
 
-    socket.on('mobile-instructions', instructions => {
+
+   
+
+   socket.on('mobile-instructions', instructions => {
         console.log(instructions);
         socket.broadcast.emit('mupi-instructions', instructions);
     })
 
 });
+
 

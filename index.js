@@ -5,7 +5,7 @@
 import { express, Server, cors, os } from './dependencies.js'
 
 const PORT = 5080; 
-const SERVER_IP = '172.30.65.245'; //Reemplazar IP U:172.30.65.245 .. / Barns: 192.168.68.110 // 172.30.65.245
+const SERVER_IP = '192.168.68.110'; //Reemplazar IP U:172.30.65.245 .. / Barns: 192.168.68.110 // 172.30.65.245
 
 const app = express();
 app.use(cors({ origin: "*" }));

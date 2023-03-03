@@ -10,7 +10,7 @@ let wHeight = screen.height;
 let wWidth = screen.width;
 
 let imageFiles = [];
-let mobileScreen = 3;
+let mobileScreen = 2;
 
 
 
@@ -47,8 +47,25 @@ function setup() {
 
 function draw() {
     background(0);
-    //newCursor(pmouseX, pmouseY);
-  image(imageFiles[3], 30, 0, 395, 853);
+   
+  
+    switch (mobileScreen) {
+        case 0:
+            image(imageFiles[0], 30, 0, 395, 853);
+           break;
+           case 1:
+            image(imageFiles[1], 30, 250, 700, 330);
+            break;
+            case 2:
+                image(imageFiles[2], 30, 250, 700, 330);
+                break;   
+            case 3:
+                image(imageFiles[3], 30, 0, 395, 853);
+                break;  
+            case 4:
+                image(imageFiles[4], 30, 0, 395, 853);
+                break;
+}
 
        
 }
@@ -56,7 +73,7 @@ function draw() {
 function deviceMoved() {
     switch (interactions) {
         case 2:
-            socket.emit('mobile-instructions', { interactions, rotationY, rotationZ });
+            socket.emit('mobile-instructions', { interactions, rotationX, rotationY, rotationZ });
             background(0, 255, 0);
             break;
     } 
